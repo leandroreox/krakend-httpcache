@@ -78,18 +78,19 @@ How to build into krakend
 
 We need to recompile kraken-cd in order to interpret new redis config schema
 
-Edit krakend-ce go.mod file and in the requires section add
+Edit krakend-ce go.mod at the end add
 
 ```
-require (
-    github.com/leandroreox/krakend-rediscache v1.0
-)
+replace github.com/devopsfaith/krakend-httpcache v1.4.0 => github.com/leandroreox/krakend-httpcache v1.4.1
 ```
 
-And at the end of the go.mod file add a replace sentence
+
+Build inside a go 1.16 container
 
 ```
-replace github.com/devopsfaith/krakend-httpcache v1.4.0 => github.com/leandroreox/krakend-rediscache v1.0
+docker run --rm -it -v "$(pwd):/app" -w /app golang:1.16.4 bash
+make build
 ```
 
-re-build krakend-ce, and run it !
+re-build krakend-ce, and run it !	
+
